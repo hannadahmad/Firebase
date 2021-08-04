@@ -16,7 +16,7 @@ const [password, setPassword] = useState("");
 
 const userPass = () => {
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
  if (identifier == '' || password == '') {
     Alert.alert('Login Status','Username/Password missing'); 
  }
