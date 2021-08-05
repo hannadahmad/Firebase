@@ -1,10 +1,10 @@
 import thunkMiddleware from 'redux-thunk';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
-import { setNavigationStatus } from './Reducer/NavigationReducer';
+import { fetchLoginState } from './Reducer/NavigationReducer';
 
 
 const rootReducer = combineReducers({
-  user: setNavigationStatus,
+  user: fetchLoginState,
 });
 export const Store = createStore(
   rootReducer,

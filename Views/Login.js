@@ -2,37 +2,39 @@ import React, { useState } from 'react';
 import {Text, TextInput, View, StyleSheet, Button, Alert} from 'react-native';  
 import loginDesign from '../Stylesheet/loginDesign';
 import { useDispatch, useSelector } from 'react-redux';
-import { SetScreenToDashboard, SetScreenToSignup} from '../Actions/NavigationAction.js';
+import { setLoginState } from '../Actions/NavigationAction';
 import auth from '@react-native-firebase/auth'
 
 
 
 //main funtion
 const Login = () => {
+
 //set useState
 const [identifier, setIdentifier] = useState("");
 const [password, setPassword] = useState("");
+const dispatch = useDispatch()
 
-
-
-const dispatch = useDispatch();
 const userPass = () => {
  if (identifier == '' || password == '') {
     Alert.alert('Login Status','Username/Password missing'); 
  }
  else
  {
-auth().signInWithEmailAndPassword(identifier,password).then ((response)=> {
+auth().signInWithEmailAndPassword(identifier,password).then((response)=> {
 if (response.user.uid != null)
 {
   Alert.alert('Login status', "Successfull");
-  dispatch(SetScreenToDashboard());
+  dispatch(setLoginState());
 }
-}).catch((error) => { Alert.alert('Login status', "Username/password is wrong, please try again")
-})
+}).catch((error) => { Alert.alert('Login status', "Username/password is wrong, please try again");
+dispatch(setLoginState());
 
- }
-}
+})}}
+ 
+
+
+
 
 return (
 
@@ -44,11 +46,10 @@ return (
     <TextInput placeholder='Enter Password' secureTextEntry={true} placeholderTextColor='teal'  style={loginDesign.txtInputView} onChangeText = {change = (password) => setPassword(password) } />
 
     <View style={loginDesign.buttonView}>
-      <Button color='teal' title="Submit" onPress={userPass} />
+      <Button color='teal' title="Submit" />
     </View>
     <View style={loginDesign.buttonView}>
-      <Button color='teal' title="Sign Up" onPress={() => dispatch(SetScreenToSignup()
-      )} />
+      <Button color='teal' title="Sign Up"  />
     </View>
     </View>
     

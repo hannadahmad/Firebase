@@ -2,16 +2,16 @@
 import * as t from '../Actions/NavigationAction'
 
 export const initialState = {
-data:''
+isLoggedIn:false
   };
 
-  export const setNavigationStatus = (state = initialState, action) => {
+  export const fetchLoginState = (state = initialState, action) => {
     switch (action.type) {
     
-      case t.SET_NAVIGATION_STATUS:
+      case t.SET_LOGIN_STATE:
         return {
             ...state,
-            data: action.payload,
+            isLoggedIn: action.payload,
             };
       default:
         return state;
